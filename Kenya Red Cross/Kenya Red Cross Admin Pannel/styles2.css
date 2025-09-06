@@ -1,0 +1,309 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+/* Base Styling */
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: #e2e2e2;
+  overflow-x: hidden;
+  color: #333;
+}
+
+/* Navigation */
+nav {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  height: 100vh;
+  width: 250px;
+  background-color: #fff;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  transition: width 0.3s ease;
+  z-index: 1000;
+}
+
+nav:hover {
+  width: 280px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+  padding: 0 15px;
+}
+
+.logo img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.logo span {
+  font-weight: 600;
+  margin-left: 10px;
+  font-size: 18px;
+  text-transform: uppercase;
+  color: #333;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+ul li {
+  margin: 10px 0;
+}
+
+ul li a {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  font-size: 14px;
+  color: #555;
+  transition: all 0.3s ease;
+}
+
+ul li a i {
+  margin-right: 10px;
+  font-size: 18px;
+  color: #34af6d;
+}
+
+ul li:hover a {
+  background: #f1f1f1;
+  color: #34af6d;
+}
+
+.logout {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+}
+
+/* Main Content */
+.main {
+  margin-left: 250px;
+  padding: 20px;
+  width: calc(100% - 250px);
+  transition: margin-left 0.3s ease, width 0.3s ease;
+}
+
+.main-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.main-top i {
+  font-size: 24px;
+  cursor: pointer;
+  color: #34af6d;
+  transition: color 0.3s ease;
+}
+
+.main-top i:hover {
+  color: #2a8c5a;
+}
+
+/* Cards */
+.users {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  width: calc(25% - 15px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.card img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.card h4 {
+  margin-top: 15px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.card p {
+  font-size: 14px;
+  color: #777;
+}
+
+.card button {
+  background: transparent;
+  border: 1px solid #34af6d;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: all 0.3s ease;
+}
+
+.card button:hover {
+  background: #34af6d;
+  color: #fff;
+}
+
+/* Tables */
+.attendance,
+.active-users {
+  margin-top: 30px;
+}
+
+.attendance-list,
+.active-users-list {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.table thead {
+  background: #34af6d;
+  color: #fff;
+}
+
+.table th,
+.table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.table tbody tr:nth-of-type(odd) {
+  background-color: #f9f9f9;
+}
+
+.table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Dropdown */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  z-index: 1000;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu li {
+  margin: 0;
+  padding: 10px;
+  transition: background 0.3s ease;
+}
+
+.dropdown-menu li:hover {
+  background: #f1f1f1;
+}
+
+/* Buttons */
+button {
+  background-color: #ff4b5c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #e63946;
+}
+
+button.deactivate {
+  background-color: #ffa500;
+}
+
+button.deactivate:hover {
+  background-color: #cc8400;
+}
+
+button.suspend {
+  background-color: #007bff;
+}
+
+button.suspend:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  nav {
+    width: 80px;
+  }
+
+  nav:hover {
+    width: 100px;
+  }
+
+  .logo span {
+    display: none;
+  }
+
+  .main {
+    margin-left: 80px;
+    width: calc(100% - 80px);
+  }
+
+  .card {
+    width: calc(50% - 10px);
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    width: 100%;
+  }
+
+  .table th,
+  .table td {
+    padding: 8px;
+  }
+}

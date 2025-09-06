@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedbacks Report</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background-color: #343a40;
+            color: white;
+            position: fixed;
+            padding-top: 20px;
+        }
+        
+        .sidebar a {
+            color: #dee2e6;
+            text-decoration: none;
+            display: block;
+            padding: 12px 20px;
+            transition: all 0.3s;
+        }
+        
+        .sidebar a:hover {
+            background-color: #495057;
+            color: white;
+        }
+        
+        .sidebar .logo {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            background-color: #212529;
+        }
+        
+        .sidebar .logo img {
+            width: 40px;
+            margin-right: 10px;
+        }
+        
+        .main-content {
+            margin-left: 250px;
+            padding: 25px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .header h1 {
+            color: #d32f2f;
+            margin: 0;
+        }
+        
+        .search-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .search-container input {
+            padding: 10px 15px;
+            border-radius: 4px;
+            border: 1px solid #ced4da;
+            min-width: 250px;
+        }
+        
+        .btn {
+            padding: 10px 15px;
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .btn:hover {
+            background-color: #b71c1c;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        th {
+            background-color: #d32f2f;
+            color: white;
+            font-weight: 600;
+        }
+        
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 30px;
+            color: #6c757d;
+        }
+        
+        .no-data {
+            text-align: center;
+            padding: 20px;
+            color: #6c757d;
+            font-style: italic;
+        }
+        
+        .error {
+            text-align: center;
+            padding: 20px;
+            color: #dc3545;
+            font-weight: 500;
+        }
+        
+        .message-cell {
+            max-width: 300px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .timestamp {
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <nav class="sidebar">
+        <ul>
+            <li>
+                <a href="#" class="logo">
+                    <img src="images/logo.png" alt="Logo">
+                    <span class="nav-item">Admin</span>
+                </a>
+            </li>
+            <li>
+                <a href="dashboard.html">
+                    <i class="fas fa-menorah"></i>
+                    <span class="nav-item">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="feedbacks_reports.html" class="active">
+                    <i class="fas fa-chart-line"></i>
+                    <span class="nav-item">Feedbacks Report</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="main-content">
+        <div class="header">
+            <h1>Feedbacks Report</h1>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search feedbacks...">
+                <button id="download-csv-btn" class="btn">
+                    <i class="fas fa-download"></i> CSV
+                </button>
+                <button id="download-pdf-btn" class="btn">
+                    <i class="fas fa-file-pdf"></i> PDF
+                </button>
+            </div>
+        </div>
+
+        <div id="loadingIndicator" class="loading">
+            <i class="fas fa-spinner fa-spin"></i> Loading feedback data...
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Feedback ID</th>
+                    <th>Sender</th>
+                    <th>Receiver</th>
+                    <th>Message</th>
+                    <th class="timestamp">Date & Time</th>
+                </tr>
+            </thead>
+            <tbody id="feedbacksTable"></tbody>
+        </table>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+    <script type="module" src="feedbacks_report.js"></script>
+</body>
+</html>

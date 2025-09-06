@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase Configuration Guide - Kenya Red Cross</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #e30613;
+            --primary-dark: #b80510;
+            --secondary: #2c3e50;
+            --light: #f5f7fa;
+            --gray: #78909c;
+            --success: #4caf50;
+            --warning: #ff9800;
+            --danger: #f44336;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4eaf1 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            background: var(--primary);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .logo {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            padding: 25px;
+            border-radius: 8px;
+            background: #f9f9f9;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--primary);
+        }
+        
+        h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+        
+        h2 .number {
+            background: var(--primary);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-size: 18px;
+        }
+        
+        h3 {
+            color: var(--secondary);
+            margin: 20px 0 12px;
+            display: flex;
+            align-items: center;
+        }
+        
+        h3 .icon {
+            margin-right: 10px;
+            color: var(--primary);
+        }
+        
+        .steps {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .steps li {
+            margin-bottom: 15px;
+            padding-left: 5px;
+        }
+        
+        .steps li strong {
+            color: var(--primary);
+        }
+        
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 18px;
+            border-radius: 6px;
+            font-family: 'Fira Code', monospace;
+            overflow-x: auto;
+            line-height: 1.5;
+            margin: 15px 0;
+            font-size: 15px;
+            position: relative;
+        }
+        
+        .code-block::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--primary);
+            color: white;
+            padding: 2px 10px;
+            font-size: 12px;
+            border-bottom-left-radius: 5px;
+        }
+        
+        .json-code::before {
+            content: 'JSON';
+        }
+        
+        .js-code::before {
+            content: 'JavaScript';
+        }
+        
+        .bash-code::before {
+            content: 'Terminal';
+        }
+        
+        .firebase-config {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            overflow-x: auto;
+            line-height: 1.5;
+            margin: 15px 0;
+        }
+        
+        .config-key {
+            color: #a6e22e;
+        }
+        
+        .config-value {
+            color: #e6db74;
+        }
+        
+        .important {
+            background: #fff4f4;
+            border-left: 4px solid var(--primary);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .success {
+            background: #f0f9f0;
+            border-left: 4px solid var(--success);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .test-area {
+            background: #e8f4fc;
+            border-left: 4px solid #2196f3;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 6px;
+        }
+        
+        .test-result {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .test-success {
+            background: #f0f9f0;
+            border: 1px solid #4caf50;
+            color: #2e7d32;
+        }
+        
+        .test-error {
+            background: #ffebee;
+            border: 1px solid #f44336;
+            color: #c62828;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+        
+        .btn-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: var(--secondary);
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 0 10px;
+            }
+            
+            header {
+                padding: 1.5rem;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">⛑️</div>
+            <h1>Firebase Configuration Guide</h1>
+            <p>Verify if Firebase is working and learn how to change Firebase accounts</p>
+        </header>
+        
+        <div class="content">
+            <div class="section">
+                <h2><span class="number">1</span>Check if Firebase is Working</h2>
+                
+                <h3><span class="icon">🔍</span>How to Verify Firebase Connection</h3>
+                
+                <div class="steps">
+                    <ol>
+                        <li><strong>Open your application</strong> in the browser using Live Server</li>
+                        <li><strong>Open Developer Tools</strong> (F12 or right-click → Inspect)</li>
+                        <li><strong>Go to the Console tab</strong> to see any Firebase errors</li>
+                        <li><strong>Check the Network tab</strong> for failed requests to Firebase</li>
+                        <li><strong>Test authentication</strong> by trying to sign up or log in</li>
+                    </ol>
+                </div>
+                
+                <div class="test-area">
+                    <h3>Test Your Current Firebase Configuration</h3>
+                    <p>Click the button below to test if your Firebase connection is working:</p>
+                    <button class="btn" id="testFirebase">Test Firebase Connection</button>
+                    
+                    <div id="testResult" class="test-result"></div>
+                </div>
+                
+                <div class="important">
+                    <p><strong>Common Firebase Issues:</strong></p>
+                    <ul>
+                        <li>Incorrect API keys in your configuration</li>
+                        <li>Firebase project not properly set up</li>
+                        <li>Authentication methods not enabled in Firebase Console</li>
+                        <li>Database rules preventing read/write operations</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2><span class="number">2</span>Your Current Firebase Configuration</h2>
+                
+                <p>This is the Firebase configuration from your JavaScript files:</p>
+                
+                <div class="firebase-config">
+                    <span class="config-key">apiKey</span>: <span class="config-value">"AIzaSyBwWUAEfAAHATNqiw3LdbyP_JuVN7_GobU"</span>,<br>
+                    <span class="config-key">authDomain</span>: <span class="config-value">"red-cross-project-database.firebaseapp.com"</span>,<br>
+                    <span class="config-key">databaseURL</span>: <span class="config-value">"https://red-cross-project-database-default-rtdb.europe-west1.firebasedatabase.app"</span>,<br>
+                    <span class="config-key">projectId</span>: <span class="config-value">"red-cross-project-database"</span>,<br>
+                    <span class="config-key">storageBucket</span>: <span class="config-value">"red-cross-project-database.appspot.com"</span>,<br>
+                    <span class="config-key">messagingSenderId</span>: <span class="config-value">"875886335283"</span>,<br>
+                    <span class="config-key">appId</span>: <span class="config-value">"1:875886335283:web:90d2030be7de3959ae1a46"</span>,<br>
+                    <span class="config-key">measurementId</span>: <span class="config-value">"G-YC8MJY9090"</span>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2><span class="number">3</span>How to Change Firebase Account</h2>
+                
+                <h3><span class="icon">🔄</span>Step-by-Step Process</h3>
+                
+                <div class="steps">
+                    <ol>
+                        <li><strong>Go to Firebase Console</strong> - Visit <a href="https://console.firebase.google.com/" target="_blank">https://console.firebase.google.com/</a></li>
+                        <li><strong>Create a new project</strong> or select an existing one</li>
+                        <li><strong>Set up authentication</strong> - Enable Email/Password sign-in</li>
+                        <li><strong>Create a Realtime Database</strong> - Set security rules</li>
+                        <li><strong>Get your configuration</strong> - Go to Project Settings → General → Your apps</li>
+                        <li><strong>Update your JavaScript files</strong> - Replace the config values</li>
+                    </ol>
+                </div>
+                
+                <h3><span class="icon">⚙️</span>Where to Update Configuration</h3>
+                
+                <p>You need to update the Firebase configuration in all your JavaScript files:</p>
+                
+                <div class="code-block js-code">
+// In index.js, index2.js, index3.js, index4.js, index5.js, login.js, register.js
+const firebaseConfig = {
+    apiKey: "YOUR_NEW_API_KEY",
+    authDomain: "YOUR_NEW_AUTH_DOMAIN",
+    databaseURL: "YOUR_NEW_DATABASE_URL",
+    projectId: "YOUR_NEW_PROJECT_ID",
+    storageBucket: "YOUR_NEW_STORAGE_BUCKET",
+    messagingSenderId: "YOUR_NEW_SENDER_ID",
+    appId: "YOUR_NEW_APP_ID",
+    measurementId: "YOUR_NEW_MEASUREMENT_ID"
+};
+                </div>
+                
+                <div class="important">
+                    <p><strong>Important:</strong> You must update the configuration in every JavaScript file that uses Firebase. There are 7 files in your project that need updating.</p>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2><span class="number">4</span>Setting Up a New Firebase Project</h2>
+                
+                <h3><span class="icon">🚀</span>Create a New Project</h3>
+                
+                <div class="steps">
+                    <ol>
+                        <li><strong>Click "Create a project"</strong> in Firebase Console</li>
+                        <li><strong>Name your project</strong> (e.g., "kenya-red-cross-admin")</li>
+                        <li><strong>Enable Google Analytics</strong> (optional)</li>
+                        <li><strong>Create the project</strong></li>
+                    </ol>
+                </div>
+                
+                <h3><span class="icon">🔐</span>Set Up Authentication</h3>
+                
+                <div class="steps">
+                    <ol>
+                        <li><strong>Go to Authentication</strong> → Sign-in method</li>
+                        <li><strong>Enable Email/Password</strong> provider</li>
+                        <li><strong>Save changes</strong></li>
+                    </ol>
+                </div>
+                
+                <h3><span class="icon">🗃️</span>Set Up Realtime Database</h3>
+                
+                <div class="steps">
+                    <ol>
+                        <li><strong>Go to Realtime Database</strong></li>
+                        <li><strong>Create database</strong> - Choose a location</li>
+                        <li><strong>Set security rules</strong> - Start in test mode</li>
+                    </ol>
+                </div>
+                
+                <div class="code-block json-code">
+// Example starter security rules (for development only)
+{
+  "rules": {
+    ".read": true,
+    ".write": true
+  }
+}
+                </div>
+                
+                <div class="important">
+                    <p><strong>Security Warning:</strong> These rules allow anyone to read and write to your database. For production, implement proper authentication-based rules.</p>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2><span class="number">5</span>Get Your New Firebase Config</h2>
+                
+                <h3><span class="icon">📋</span>How to Find Configuration Values</h3>
+                
+                <div class="steps">
+                    <ol>
+                        <li><strong>Go to Project Settings</strong> (gear icon)</li>
+                        <li><strong>Select "General" tab</strong></li>
+                        <li><strong>Scroll to "Your apps"</strong></li>
+                        <li><strong>Add a web app</strong> if you haven't already</li>
+                        <li><strong>Copy the config values</strong></li>
+                    </ol>
+                </div>
+                
+                <div class="success">
+                    <p><strong>Tip:</strong> You can register multiple web apps in the same Firebase project if you have different environments (development, production).</p>
+                </div>
+            </div>
+            
+            <div class="btn-container">
+                <button class="btn" onclick="window.open('https://console.firebase.google.com/', '_blank')">Go to Firebase Console</button>
+                <button class="btn" onclick="window.print()" style="background: var(--secondary);">Print This Guide</button>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Kenya Red Cross Admin Panel - Firebase Configuration Guide &copy; 2023</p>
+        </footer>
+    </div>
+
+    <script>
+        // Test Firebase connection
+        document.getElementById('testFirebase').addEventListener('click', function() {
+            const testResult = document.getElementById('testResult');
+            testResult.style.display = 'block';
+            testResult.className = 'test-result';
+            testResult.innerHTML = '<p>Testing Firebase connection...</p>';
+            
+            try {
+                // Try to load Firebase libraries
+                const script = document.createElement('script');
+                script.src = 'https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js';
+                document.head.appendChild(script);
+                
+                script.onload = function() {
+                    // Check if Firebase is available
+                    if (typeof firebase === 'undefined') {
+                        testResult.innerHTML = '<p>❌ Could not load Firebase SDK</p>';
+                        testResult.classList.add('test-error');
+                        return;
+                    }
+                    
+                    // Try to initialize with current config
+                    try {
+                        const firebaseConfig = {
+                            apiKey: "AIzaSyBwWUAEfAAHATNqiw3LdbyP_JuVN7_GobU",
+                            authDomain: "red-cross-project-database.firebaseapp.com",
+                            databaseURL: "https://red-cross-project-database-default-rtdb.europe-west1.firebasedatabase.app",
+                            projectId: "red-cross-project-database",
+                            storageBucket: "red-cross-project-database.appspot.com",
+                            messagingSenderId: "875886335283",
+                            appId: "1:875886335283:web:90d2030be7de3959ae1a46",
+                            measurementId: "G-YC8MJY9090"
+                        };
+                        
+                        const app = firebase.initializeApp(firebaseConfig);
+                        testResult.innerHTML = `
+                            <p>✅ Firebase initialized successfully!</p>
+                            <p>Project: ${firebaseConfig.projectId}</p>
+                            <p>Database: ${firebaseConfig.databaseURL}</p>
+                        `;
+                        testResult.classList.add('test-success');
+                    } catch (error) {
+                        testResult.innerHTML = `
+                            <p>❌ Firebase initialization error</p>
+                            <p>${error.message}</p>
+                        `;
+                        testResult.classList.add('test-error');
+                    }
+                };
+                
+                script.onerror = function() {
+                    testResult.innerHTML = '<p>❌ Could not load Firebase SDK</p>';
+                    testResult.classList.add('test-error');
+                };
+            } catch (error) {
+                testResult.innerHTML = `
+                    <p>❌ Error testing Firebase</p>
+                    <p>${error.message}</p>
+                `;
+                testResult.classList.add('test-error');
+            }
+        });
+    </script>
+</body>
+</html>

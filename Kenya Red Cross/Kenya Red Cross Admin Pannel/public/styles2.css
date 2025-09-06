@@ -1,0 +1,245 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: rgb(255, 255, 255);
+  overflow-x: hidden;
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  height: 100vh;
+  width: 250px;
+  background-color: #b61414;
+  box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  transition: width 0.3s ease;
+}
+
+nav:hover {
+  width: 280px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.logo img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+}
+
+.logo span {
+  font-weight: bold;
+  margin-left: 10px;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+ul li {
+  margin: 10px 0;
+}
+
+ul li a {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  font-size: 14px;
+  color: #e4eef1;
+  transition: background 0.3s ease;
+}
+
+ul li a i {
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+ul li:hover a {
+  background: #e00e0e;
+}
+
+.logout {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+}
+
+.main {
+  margin-left: 250px;
+  padding: 20px;
+  width: calc(100% - 250px);
+  transition: margin-left 0.3s ease, width 0.3s ease;
+}
+
+.main-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main-top i {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.users {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  width: calc(25% - 10px);
+  margin-bottom: 20px;
+}
+
+.card img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+}
+
+.card h4 {
+  margin-top: 15px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.card p {
+  font-size: 14px;
+  color: #777;
+}
+
+.card button {
+  background: transparent;
+  border: 1px solid #34af6d;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+.card button:hover {
+  background: #34af6d;
+  color: #fff;
+}
+
+.attendance {
+  margin-top: 30px;
+}
+.active-users {
+    margin-top: 60px;
+}
+.active-users-list {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.attendance-list {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.table thead {
+  background: #34af6d;
+  color: #fff;
+}
+
+.table th,
+.table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.table tbody tr:nth-of-type(odd) {
+  background-color: #f9f9f9;
+}
+
+.table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown-menu {
+  display: none;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu li {
+  margin-left: 20px;
+}
+
+/* Button styles */
+button {
+  background-color: #ff4b5c; /* Red background for the button */
+  color: white; /* White text */
+  border: none; /* Remove default borders */
+  border-radius: 5px; /* Rounded corners */
+  padding: 10px 15px; /* Padding for the button */
+  font-size: 14px; /* Font size */
+  cursor: pointer; /* Change cursor on hover */
+  transition: background-color 0.3s ease; /* Smooth transition effect */
+}
+
+button:hover {
+  background-color: #0918e7; /* Darker red on hover */
+}
+
+/* Specific class for deactivate button */
+button.deactivate {
+  background-color: #ffa500; /* Orange color */
+}
+
+button.deactivate:hover {
+  background-color: #e59400; /* Darker orange on hover */
+}
+
+/* Specific class for suspend button */
+button.suspend {
+  background-color: #007bff; /* Blue color */
+}
+
+button.suspend:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+

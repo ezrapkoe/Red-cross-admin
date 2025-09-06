@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="styles2.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <nav class="sidebar">
+            <ul>
+                <li><a href="#" class="logo">
+                        <img src="images/logo.png" alt="Logo">
+                        <span class="nav-item">Admin</span>
+                    </a></li>
+                <li><a href="dashboard.html">
+                        <i class="fas fa-menorah"></i>
+                        <span class="nav-item">Dashboard</span>
+                    </a></li>
+                <li class="dropdown">
+                    <a href="#"><i class="fas fa-users"></i> Users <i class="fas fa-chevron-right"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="active_users.html">Active</a></li>
+                        <li><a href="suspended_users.html">Suspended</a></li>
+                        <li><a href="pending_users.html">Pending</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#"><i class="fas fa-user-tie"></i> Employees <i class="fas fa-chevron-right"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="active_employees.html">Active</a></li>
+                        <li><a href="inactive_employees.html">Inactive</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">
+                        <i class="fas fa-comment"></i>
+                        <span class="nav-item">Message</span>
+                    </a></li>
+                <li class="dropdown">
+                    <a href="#"><i class="fas fa-users"></i> Reports <i class="fas fa-chevron-right"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Finance Reports</a></li>
+                        <li><a href="#">Service Reports</a></li>
+                        <li><a href="#">Supply Reports</a></li>
+                        <li><a href="#">Donations Reports</a></li>
+
+                    </ul>
+                </li>
+                <li><a href="#">
+                        <i class="fas fa-chart-bar"></i>
+                        <span class="nav-item">Attendance</span>
+                    </a></li>
+                <li><a href="#">
+                        <i class="fas fa-cog"></i>
+                        <span class="nav-item">Setting</span>
+                    </a></li>
+                <li><a href="login.html" class="logout">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span class="nav-item">Log out</span>
+                    </a></li>
+            </ul>
+        </nav>
+
+        <section class="main">
+            <section class="active-users"></section>
+            <div class="active-users-list">
+                <h1>Active Employees List</h1>
+
+                <!-- Add User Form -->
+                <div class="add-user-form">
+                    <h2>Add User</h2>
+                    <form id="userForm">
+                        <input type="text" id="username" placeholder="Username" required />
+                        <input type="email" id="email" placeholder="Email" required />
+                        <input type="password" id="password" placeholder="Password" required />
+                        <select id="role" required>
+                            <option value="">Select Role</option>
+                            <option value="Service Manager">Service Manager</option>
+                            <option value="Trainer">Trainer</option>
+                            <option value="Coordinator">Coordinator</option>
+                            <option value="Finance Manager">Finance Manager</option>
+                            <option value="Inventory Manager">Inventory Manager</option>
+                            <option value="Supplier">Supplier</option>
+                        </select>
+                        <button type="submit">Add User</button>
+                    </form>
+                </div>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Password</th>
+                            <th>Sign Up Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Data will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <script type="module" src="index4.js"></script>
+</body>
+
+</html>
